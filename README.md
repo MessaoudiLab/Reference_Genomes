@@ -28,28 +28,28 @@ mkdir "Homo_sapiens_refgenome"
 ```
 wget {URL address}
 ```
-example
+  example
 ```
 wget ftp://ftp.ensembl.org/pub/release-94/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 ```
 
-4.From the same website, locate the corresponding GTF file
+5. From the same website, locate the corresponding GTF file
 
 - example
   - Homo_sapiens.GRCh38.94.gtf.gz
 
-5. Rightclick over file link and copy URL address
+6. Rightclick over file link and copy URL address
 
-6. In the same directory, download GTF file using wget
+7. In the same directory, download GTF file using wget
 ```
 wget {URL address}
 ```
-example
+  example
 ```
 wget ftp://ftp.ensembl.org/pub/release-94/gtf/homo_sapiens/Homo_sapiens.GRCh38.94.gtf.gz
 ```
 
-7. Unzip FASTA and GTF files
+8. Unzip FASTA and GTF files
 ```
 gunzip Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 gunzip Homo_sapiens.GRCh38.94.gtf.gz
