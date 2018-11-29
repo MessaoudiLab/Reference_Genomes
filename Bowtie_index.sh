@@ -23,7 +23,7 @@ SLURM_SUBMIT_DIR: /bigdata/messaoudilab/arivera/ReferenceGenome/Homo_sapiens
 cd $SLURM_SUBMIT_DIR
 
 # Concatenate BAMs
-samtools cat -h header.sam -o out.bam in1.bam in2.bam
+bowtie2-build Homo_sapiens.GRCh38.dna.toplevel.fa.gz Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 
 # Print name of node
 hostname
