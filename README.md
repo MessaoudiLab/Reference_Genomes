@@ -32,7 +32,6 @@ wget {URL address}
 ```
 wget ftp://ftp.ensembl.org/pub/release-94/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 ```
-
 5. From the same website, locate the corresponding GTF file
 
 - example
@@ -76,9 +75,35 @@ bowtie2-build Homo_sapiens.GRCh38.dna.toplevel.fa.gz Homo_sapiens.GRCh38.dna.top
 ```
 
 Building a bowtie index can take 1-2 hours
-You can submit the job to the cluster using an sbatch shell script. See example
+You can submit the job to the cluster using an sbatch shell script. See bowtie2_index.sh
+
+Make sure to cutomize (i.e. output file name ".stdout", email, jobname, directory, file name of FASTA)
+
+This script will submit the job into the cluster. All STDOUT will be redirected to a file called “my.stdout” as well as an email sent to the user when the status of the job changes.
+
 ```
 sbatch bowtie2_index.sh
 ```
 ## Creating host/virus reference
-1. Concatenate 
+1. Download the viral genome in FASTA format using wget. Can use below link as a source
+https://www.viprbrc.org/brc/home.spg?decorator=vipr
+
+2. Concatenate host and viral FASTA files. 
+```
+cat {host_FASTA} {virus_FASTA} > {give_new_name}
+```
+2. Change chromosome identifier in new FASTA file. Because viral genomes are small, they can be annotated as if they were an additional chromosome in the host genome. The header information of the viral FASTA file needs to be amended to look like the host.
+- enter a highmem subnode
+```
+srun -p highmem --mem=100g --time=24:00:00 --pty bash -l
+```
+- open new FASTA file using nano and scroll to the end to find the viral genome ("control" "w" "v" and "control" "y")
+
+- change chromosome identifier to follow format of host genome, but still be unique from the rest of the host genome
+- save file
+
+3. Modify host GTF file to include information about viral genome. 
+- Most databases for viral genomes will provide information about each viral gene but won't format that information as a GTF. 
+- In the host GTF file add information for each viral gene at the end of the file, following the GTF format as the host. 
+- Annotate each gene as a gene and exon and use the same chromosome identifier as previously defined in the concatenated FASTA file. 
+
