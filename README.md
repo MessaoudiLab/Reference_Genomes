@@ -108,6 +108,10 @@ Make sure to cutomize (i.e. output file name ".stdout", email, jobname, director
 
 This script will submit the job into the cluster. All STDOUT will be redirected to a file called “my.stdout” as well as an email sent to the user when the status of the job changes.
 
+```
+sbatch hisat2_index.sh
+```
+
 ## Creating host/virus reference
 1. Download the viral genome in FASTA format using wget. Can use below link as a source
 https://www.viprbrc.org/brc/home.spg?decorator=vipr
