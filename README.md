@@ -135,3 +135,5 @@ srun -p highmem --mem=100g --time=24:00:00 --pty bash -l
 - In the host GTF file add information for each viral gene at the end of the file, following the GTF format as the host. 
 - Annotate each gene as a gene and exon and use the same chromosome identifier as previously defined in the concatenated FASTA file. 
 
+See concatenated_host_viral · Benchling.pdf for example
+
