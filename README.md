@@ -54,7 +54,7 @@ gunzip Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 gunzip Homo_sapiens.GRCh38.94.gtf.gz
 ```
 
-## Building an index
+## Building a Bowtie index (for Tophat2 alignment)
 Alignment requires an index to be generated for each reference genome
 Each type of aligner requires it's own index
 
@@ -84,6 +84,30 @@ This script will submit the job into the cluster. All STDOUT will be redirected 
 ```
 sbatch bowtie2_index.sh
 ```
+## Building a Hisat2 index (for Hisat2 alignment)
+If using bowtie2, use bowtie2-build to generate the index:
+
+1. First load bowtie2
+```
+module load hisat2
+```
+
+2. Run bowtie2-build. Bowtie2-build takes the name of the FASTA file (first argument) and creates index files using the name of the FASTA file as the basename (second argument)
+```
+hisat2-build {name_of_FASTA_file} {name_of_FASTA_file}
+```
+Example
+```
+hisat2-build Homo_sapiens.GRCh38.dna.toplevel.fa.gz Homo_sapiens.GRCh38.dna.toplevel.fa.gz
+```
+
+Building a hisat2 index can take 1-2 hours
+You can submit the job to the cluster using an sbatch shell script. See hisat2_index.sh
+
+Make sure to cutomize (i.e. output file name ".stdout", email, jobname, directory, file name of FASTA)
+
+This script will submit the job into the cluster. All STDOUT will be redirected to a file called “my.stdout” as well as an email sent to the user when the status of the job changes.
+
 ## Creating host/virus reference
 1. Download the viral genome in FASTA format using wget. Can use below link as a source
 https://www.viprbrc.org/brc/home.spg?decorator=vipr
